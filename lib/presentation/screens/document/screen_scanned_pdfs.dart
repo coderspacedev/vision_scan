@@ -5,13 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:visionscan/extensions/app_styles.dart';
-import 'package:visionscan/extensions/screen_size.dart';
+import 'package:visionscan/vision.dart';
 
-import '../../../extensions/app_colors.dart';
-import '../../../widgets/app_bar.dart';
-import '../../../widgets/app_container.dart';
-import '../document/screen_document_scan_preview.dart';
+import 'screen_document_scan_preview.dart';
 
 class ScreenScannedPdfs extends StatefulWidget {
   const ScreenScannedPdfs({super.key});

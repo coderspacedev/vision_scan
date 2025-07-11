@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:visionscan/extensions/app_styles.dart';
-import 'package:visionscan/extensions/screen_size.dart';
-
-import '../../../databases/app_database.dart';
-import '../../../databases/qr_history.dart';
-import '../../../extensions/app_colors.dart';
-import '../../../widgets/app_bar.dart';
-import '../../../widgets/app_container.dart';
+import 'package:visionscan/vision.dart';
 
 class ScreenQrHistory extends StatefulWidget {
   const ScreenQrHistory({super.key});
@@ -58,9 +51,9 @@ class _ScreenQrHistoryState extends State<ScreenQrHistory> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(child: Text('Error: ${snapshot.error}', style: context.bodyBoldMedium));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('No scanned history'));
+          return Center(child: Text('No scanned history', style: context.bodyBoldMedium));
         }
 
         final history = snapshot.data!;

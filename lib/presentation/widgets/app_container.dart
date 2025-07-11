@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:visionscan/extensions/screen_size.dart';
-import '../extensions/app_colors.dart';
+import 'package:visionscan/vision.dart';
 
 class AppContainer extends StatelessWidget {
   final Widget? child;

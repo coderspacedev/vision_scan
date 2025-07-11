@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'screen_dashboard.dart';
-import '../../extensions/context.dart';
-import '../../extensions/screen_size.dart';
-import '../../extensions/app_colors.dart';
-import '../../extensions/app_styles.dart';
+import 'package:visionscan/vision.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});

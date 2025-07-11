@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MainController extends GetxController {
+class AppController extends GetxController {
   final box = GetStorage();
   RxString selectedLanguage = "".obs;
   RxString selectedTheme = "dark".obs;

@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_contact_picker/model/contact.dart';
 import 'package:get/get.dart';
-import 'package:visionscan/extensions/context.dart';
-import 'package:visionscan/extensions/screen_size.dart';
+import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
 import 'package:visionscan/presentation/screens/qr/screen_barcode_generate_result.dart';
 import 'package:visionscan/presentation/screens/qr/screen_qr_generate_result.dart';
-import 'package:visionscan/widgets/app_text_field.dart';
-import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
-
-import '../../../extensions/app_colors.dart';
-import '../../../widgets/app_bar.dart';
-import '../../../widgets/app_button.dart';
+import 'package:visionscan/vision.dart';
 
 class ScreenCodeGenerate extends StatefulWidget {
   final String type;

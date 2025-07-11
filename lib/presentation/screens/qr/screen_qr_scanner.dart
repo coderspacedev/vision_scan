@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../../extensions/app_styles.dart';
 import '/presentation/screens/qr/screen_result.dart';
-import '../../../widgets/app_button.dart';
-import '../../../extensions/app_colors.dart';
-import '../../../extensions/context.dart';
-import '../../../extensions/screen_size.dart';
-import '../../../widgets/app_bar.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-
-import '../../../widgets/scanner_overlay_painter.dart';
+import 'package:visionscan/vision.dart';
 
 class ScreenQRScanner extends StatefulWidget {
   const ScreenQRScanner({super.key});

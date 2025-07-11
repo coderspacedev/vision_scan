@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:visionscan/presentation/screens/qr/screen_code_generate.dart';
 import 'package:visionscan/presentation/screens/qr/screen_qr_history.dart';
 import '../../../data/sources.dart';
-import '../../../extensions/app_colors.dart';
-import '../../../extensions/app_styles.dart';
-import '../../../extensions/context.dart';
-import '../../../extensions/screen_size.dart';
-import '/presentation/screens/qr/screen_code_generate.dart';
-import '../../../presentation/screens/qr/screen_qr_scanner.dart';
-import '../../../widgets/app_container.dart';
+import 'package:visionscan/vision.dart';
 
-import '../../../widgets/app_bar.dart';
+import 'screen_qr_scanner.dart';
 
 class ScreenQRDashboard extends StatefulWidget {
   const ScreenQRDashboard({super.key});

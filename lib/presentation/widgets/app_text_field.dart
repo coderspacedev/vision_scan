@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../extensions/app_colors.dart';
-import '../extensions/app_styles.dart';
+import 'package:visionscan/vision.dart';
 
 class AppTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -41,14 +40,23 @@ class AppTextField extends StatelessWidget {
       style: context.bodyLarge,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
-        prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: colorText) : null,
+        prefixIcon: prefixIcon != null
+            ? Icon(prefixIcon, color: colorText)
+            : null,
         suffixIcon: suffixIcon,
         hintText: hint,
-        hintStyle: context.bodyLarge.copyWith(color: colorText.withAlpha(100)),
+        hintStyle: context.bodyMediumLarge.copyWith(
+          color: colorText.withAlpha(100),
+        ),
         filled: true,
         fillColor: colorCard,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r), borderSide: BorderSide.none),
-        contentPadding: contentPadding ?? EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide.none,
+        ),
+        contentPadding:
+            contentPadding ??
+            EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
       ),
     );
   }

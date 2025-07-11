@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:visionscan/extensions/app_colors.dart';
-import 'package:visionscan/extensions/app_styles.dart';
-import 'package:visionscan/extensions/context.dart';
-import 'package:visionscan/extensions/screen_size.dart';
-import 'package:visionscan/widgets/app_container.dart';
-
-import '../../../databases/app_database.dart';
-import '../../../databases/qr_history.dart';
-import '../../../widgets/app_bar.dart';
-import '../../../widgets/app_button.dart';
+import 'package:visionscan/vision.dart';
 
 class ScreenResult extends StatefulWidget {
   final String qrContent;

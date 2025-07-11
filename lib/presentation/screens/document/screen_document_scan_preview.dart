@@ -4,12 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'package:visionscan/extensions/app_styles.dart';
-import 'package:visionscan/extensions/context.dart';
-import 'package:visionscan/extensions/screen_size.dart';
-
-import '../../../extensions/app_colors.dart';
-import '../../../widgets/app_bar.dart';
+import 'package:visionscan/vision.dart';
 
 class ScreenDocumentScanPreview extends StatefulWidget {
   final String? scannedDocuments;

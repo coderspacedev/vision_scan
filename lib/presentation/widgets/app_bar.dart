@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../extensions/screen_size.dart';
-import '../extensions/app_colors.dart';
-import '../extensions/app_styles.dart';
+import 'package:visionscan/vision.dart';
 
 class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;

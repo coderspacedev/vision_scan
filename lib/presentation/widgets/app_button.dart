@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:visionscan/extensions/screen_size.dart';
 
-import '../extensions/app_colors.dart';
-import '../extensions/app_styles.dart';
+import 'package:visionscan/vision.dart';
 
 class AppButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final Function()? onPressed;
   final Color? backgroundColor;
   final Color? textColor;
   final double? height;
@@ -41,7 +39,7 @@ class AppButton extends StatelessWidget {
           elevation: 0,
         ),
         onPressed: () {
-          if (!isLoading) onPressed();
+          if (!isLoading) onPressed!();
         },
         child: isLoading
             ? SizedBox(
@@ -49,7 +47,7 @@ class AppButton extends StatelessWidget {
                 height: 20.sp,
                 child: CircularProgressIndicator(strokeWidth: 2.sp, valueColor: AlwaysStoppedAnimation<Color>(textColor ?? colorAccentText)),
               )
-            : Text(text, style: style ?? context.button.copyWith(color: textColor ?? colorAccentText)),
+            : Text(text, style: style?.copyWith(color: textColor ?? colorAccentText) ?? context.button.copyWith(color: textColor ?? colorAccentText)),
       ),
     );
   }

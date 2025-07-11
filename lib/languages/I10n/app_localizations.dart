@@ -124,6 +124,18 @@ abstract class AppLocalizations {
   /// **'Scanned PDF'**
   String get tool_scanned_pdfs;
 
+  /// No description provided for @tool_merge_pdfs.
+  ///
+  /// In en, this message translates to:
+  /// **'Merge PDFs'**
+  String get tool_merge_pdfs;
+
+  /// No description provided for @tool_split_pdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Split PDF'**
+  String get tool_split_pdf;
+
   /// No description provided for @title_guide_qr_code.
   ///
   /// In en, this message translates to:

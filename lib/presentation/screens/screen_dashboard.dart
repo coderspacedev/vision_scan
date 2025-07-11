@@ -3,16 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_doc_scanner/flutter_doc_scanner.dart';
 import 'package:get/get.dart';
-import 'package:visionscan/extensions/app_styles.dart';
-import 'package:visionscan/presentation/screens/document/screen_scanned_pdfs.dart';
-import 'package:visionscan/presentation/screens/qr/screen_qr_dashboard.dart';
-import '../../extensions/app_colors.dart';
-import '../../extensions/context.dart';
-import '../../extensions/screen_size.dart';
-import '../../widgets/app_bar.dart';
-import '../../widgets/app_button.dart';
+import 'package:visionscan/vision.dart';
 
 import 'document/screen_document_scan_preview.dart';
+import 'document/screen_merge_pdfs.dart';
+import 'document/screen_scanned_pdfs.dart';
+import 'document/screen_split_pdf.dart';
+import 'qr/screen_qr_dashboard.dart';
 
 class ScreenDashboard extends StatefulWidget {
   const ScreenDashboard({super.key});
@@ -61,6 +58,28 @@ class _ScreenDashboardState extends State<ScreenDashboard> {
               text: context.localization?.tool_scanned_pdfs ?? '',
               onPressed: () {
                 Get.to(ScreenScannedPdfs());
+              },
+            ),
+            SizedBox(width: double.infinity, height: context.scale(12)),
+            AppButton(
+              width: double.infinity,
+              backgroundColor: colorCard,
+              textColor: colorCardText,
+              style: context.bodyBoldLarge,
+              text: context.localization?.tool_merge_pdfs ?? '',
+              onPressed: () {
+                Get.to(ScreenMergePdfs());
+              },
+            ),
+            SizedBox(width: double.infinity, height: context.scale(12)),
+            AppButton(
+              width: double.infinity,
+              backgroundColor: colorCard,
+              textColor: colorCardText,
+              style: context.bodyBoldLarge,
+              text: context.localization?.tool_split_pdf ?? '',
+              onPressed: () {
+                Get.to(ScreenSplitPdf());
               },
             ),
           ],

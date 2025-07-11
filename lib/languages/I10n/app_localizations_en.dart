@@ -24,6 +24,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tool_scanned_pdfs => 'Scanned PDF';
 
   @override
+  String get tool_merge_pdfs => 'Merge PDFs';
+
+  @override
+  String get tool_split_pdf => 'Split PDF';
+
+  @override
   String get title_guide_qr_code => 'Scan QR/Barcodes';
 
   @override

@@ -7,16 +7,7 @@ import 'package:gallery_saver_plus/gallery_saver.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:visionscan/extensions/app_styles.dart';
-import '../../../databases/app_database.dart';
-import '../../../databases/qr_history.dart';
-import '../../../extensions/context.dart';
-import '../../../extensions/screen_size.dart';
-
-import '../../../extensions/app_colors.dart';
-import '../../../widgets/app_bar.dart';
-import '../../../widgets/app_button.dart';
-import '../../../widgets/app_container.dart';
+import 'package:visionscan/vision.dart';
 
 class ScreenBarCodeGenerateResult extends StatefulWidget {
   final String barContent;
