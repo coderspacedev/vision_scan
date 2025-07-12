@@ -96,8 +96,8 @@ Future<File> removePagesFromPdf({
 
 Future<File> reorderPdfPages({
   required File originalFile,
-  required List<int> newOrder, // 1-based page numbers
-  String outputName = 'reordered.pdf',
+  required List<int> newOrder,
+  String outputName = 'reordered',
 }) async {
   final originalBytes = await originalFile.readAsBytes();
   final originalDoc = PdfDocument(inputBytes: originalBytes);
@@ -110,7 +110,7 @@ Future<File> reorderPdfPages({
   }
 
   final dir = await getTemporaryDirectory();
-  final outputFile = File('${dir.path}/$outputName');
+  final outputFile = File('${dir.path}/${outputName}_${DateTime.now()}.pdf');
   await outputFile.writeAsBytes(await reorderedDoc.save());
 
   originalDoc.dispose();

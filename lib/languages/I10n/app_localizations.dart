@@ -136,6 +136,78 @@ abstract class AppLocalizations {
   /// **'Split PDF'**
   String get tool_split_pdf;
 
+  /// No description provided for @tool_reorder_pdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder PDF'**
+  String get tool_reorder_pdf;
+
+  /// No description provided for @tool_remove_page_pdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Pages'**
+  String get tool_remove_page_pdf;
+
+  /// No description provided for @action_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get action_cancel;
+
+  /// No description provided for @action_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get action_continue;
+
+  /// No description provided for @action_merge.
+  ///
+  /// In en, this message translates to:
+  /// **'Merge'**
+  String get action_merge;
+
+  /// No description provided for @action_split.
+  ///
+  /// In en, this message translates to:
+  /// **'Split'**
+  String get action_split;
+
+  /// No description provided for @action_remove_pages.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Pages'**
+  String get action_remove_pages;
+
+  /// No description provided for @action_reorder_pages.
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder Pages'**
+  String get action_reorder_pages;
+
+  /// No description provided for @label_choose_pdf_file.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose PDF file'**
+  String get label_choose_pdf_file;
+
+  /// No description provided for @body_supported_file.
+  ///
+  /// In en, this message translates to:
+  /// **'Supported file: .Pdf'**
+  String get body_supported_file;
+
+  /// No description provided for @body_split_note.
+  ///
+  /// In en, this message translates to:
+  /// **'Note: Split Range (e.g., 1-3,5):'**
+  String get body_split_note;
+
+  /// No description provided for @hint_split_box.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter page ranges'**
+  String get hint_split_box;
+
   /// No description provided for @title_guide_qr_code.
   ///
   /// In en, this message translates to:

@@ -5,10 +5,11 @@ import 'package:flutter_doc_scanner/flutter_doc_scanner.dart';
 import 'package:get/get.dart';
 import 'package:visionscan/vision.dart';
 
+import 'document/operations/screen_merge_pdfs.dart';
+import 'document/operations/screen_select_pdf.dart';
 import 'document/screen_document_scan_preview.dart';
-import 'document/screen_merge_pdfs.dart';
 import 'document/screen_scanned_pdfs.dart';
-import 'document/screen_split_pdf.dart';
+import 'document/operations/screen_split_pdf.dart';
 import 'qr/screen_qr_dashboard.dart';
 
 class ScreenDashboard extends StatefulWidget {
@@ -80,6 +81,28 @@ class _ScreenDashboardState extends State<ScreenDashboard> {
               text: context.localization?.tool_split_pdf ?? '',
               onPressed: () {
                 Get.to(ScreenSplitPdf());
+              },
+            ),
+            SizedBox(width: double.infinity, height: context.scale(12)),
+            AppButton(
+              width: double.infinity,
+              backgroundColor: colorCard,
+              textColor: colorCardText,
+              style: context.bodyBoldLarge,
+              text: context.localization?.tool_reorder_pdf ?? '',
+              onPressed: () {
+                Get.to(ScreenSelectPdf(title: context.localization?.tool_reorder_pdf));
+              },
+            ),
+            SizedBox(width: double.infinity, height: context.scale(12)),
+            AppButton(
+              width: double.infinity,
+              backgroundColor: colorCard,
+              textColor: colorCardText,
+              style: context.bodyBoldLarge,
+              text: context.localization?.tool_remove_page_pdf ?? '',
+              onPressed: () {
+                Get.to(ScreenSelectPdf(title: context.localization?.tool_remove_page_pdf));
               },
             ),
           ],

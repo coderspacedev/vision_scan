@@ -30,6 +30,42 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tool_split_pdf => 'Split PDF';
 
   @override
+  String get tool_reorder_pdf => 'Reorder PDF';
+
+  @override
+  String get tool_remove_page_pdf => 'Remove Pages';
+
+  @override
+  String get action_cancel => 'Cancel';
+
+  @override
+  String get action_continue => 'Continue';
+
+  @override
+  String get action_merge => 'Merge';
+
+  @override
+  String get action_split => 'Split';
+
+  @override
+  String get action_remove_pages => 'Remove Pages';
+
+  @override
+  String get action_reorder_pages => 'Reorder Pages';
+
+  @override
+  String get label_choose_pdf_file => 'Choose PDF file';
+
+  @override
+  String get body_supported_file => 'Supported file: .Pdf';
+
+  @override
+  String get body_split_note => 'Note: Split Range (e.g., 1-3,5):';
+
+  @override
+  String get hint_split_box => 'Enter page ranges';
+
+  @override
   String get title_guide_qr_code => 'Scan QR/Barcodes';
 
   @override

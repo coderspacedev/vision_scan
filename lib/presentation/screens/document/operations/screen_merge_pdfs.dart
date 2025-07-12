@@ -49,9 +49,9 @@ class _ScreenMergePdfsState extends State<ScreenMergePdfs> {
                                 children: [
                                   Icon(Icons.add_circle_rounded, color: colorAccent, size: context.scale(56)),
                                   SizedBox(height: context.scale(12)),
-                                  Text('Choose files', style: context.bodyBoldLarge),
+                                  Text(context.localization?.label_choose_pdf_file ?? 'Choose files', style: context.bodyBoldLarge),
                                   SizedBox(height: context.scale(4)),
-                                  Text('Supported files: .Pdf', style: context.bodySmall),
+                                  Text(context.localization?.body_supported_file ?? 'Supported files: .Pdf', style: context.bodySmall),
                                 ],
                               ),
                             ),
@@ -83,26 +83,18 @@ class _ScreenMergePdfsState extends State<ScreenMergePdfs> {
                                 );
                               },
                             ),
-                          if (_isContentShort(context)) _buildBottomButtons(),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-              if (!_isContentShort(context)) _buildBottomButtons(),
+              _buildBottomButtons(),
             ],
           );
         },
       ),
     );
-  }
-
-  bool _isContentShort(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final itemHeight = context.scale(80);
-    final totalHeight = (selectedFiles.length * itemHeight) + context.scale(240);
-    return totalHeight < screenHeight;
   }
 
   Widget _buildBottomButtons() {
@@ -115,7 +107,7 @@ class _ScreenMergePdfsState extends State<ScreenMergePdfs> {
           children: [
             Expanded(
               child: AppButton(
-                text: 'Cancel',
+                text: context.localization?.action_cancel ?? 'Cancel',
                 backgroundColor: colorCard,
                 textColor: colorCardText,
                 style: context.bodyBoldMedium,
@@ -129,7 +121,7 @@ class _ScreenMergePdfsState extends State<ScreenMergePdfs> {
             SizedBox(width: context.scale(12)),
             Expanded(
               child: AppButton(
-                text: 'Merge',
+                text: context.localization?.action_merge ?? 'Merge',
                 isLoading: isMerging,
                 style: context.bodyBoldMedium,
                 textColor: colorAccentText,
