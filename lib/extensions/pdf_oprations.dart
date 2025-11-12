@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' show PdfDocument, PdfPageSettings;
 import 'package:path_provider/path_provider.dart';
+import 'package:visionscan/extensions/pdf_utils.dart';
 
 Future<File> mergePDFs(List<File> files, {String outputName = 'merged_output'}) async {
   final PdfDocument mergedDoc = PdfDocument();
@@ -23,8 +24,9 @@ Future<File> mergePDFs(List<File> files, {String outputName = 'merged_output'}) 
     doc.dispose();
   }
 
-  final dir = await getApplicationDocumentsDirectory();
-  final outputFile = File('${dir.path}/${outputName}_${DateTime.now()}.pdf');
+  final dir = await getAppVisionScanDirectory();
+  final timestamp = getFormattedTimestamp();
+  final outputFile = File('${dir.path}/${outputName}_$timestamp.pdf');
   await outputFile.writeAsBytes(await mergedDoc.save());
   mergedDoc.dispose();
   return outputFile;
@@ -34,11 +36,11 @@ Future<List<File>> splitPDFWithRemaining(File file, {required List<int> selected
   final List<File> outputFiles = [];
   final bytes = await file.readAsBytes();
   final PdfDocument document = PdfDocument(inputBytes: bytes);
-  final dir = await getApplicationDocumentsDirectory();
+  final dir = await getAppVisionScanDirectory();
 
   final totalPages = document.pages.count;
   final selectedSet = selectedPages.toSet();
-
+  final timestamp = getFormattedTimestamp();
   // 1. Create PDF with selected pages (one file per page)
   for (final i in selectedSet) {
     if (i > 0 && i <= totalPages) {
@@ -46,7 +48,7 @@ Future<List<File>> splitPDFWithRemaining(File file, {required List<int> selected
       final template = document.pages[i - 1].createTemplate();
       singlePageDoc.pages.add().graphics.drawPdfTemplate(template, Offset.zero, Size(template.size.width, template.size.height));
 
-      final output = File('${dir.path}/${outputPrefix}_only_page_$i.pdf');
+      final output = File('${dir.path}/${outputPrefix}_page_${i}_$timestamp.pdf');
       await output.writeAsBytes(await singlePageDoc.save());
       outputFiles.add(output);
       singlePageDoc.dispose();
@@ -62,7 +64,7 @@ Future<List<File>> splitPDFWithRemaining(File file, {required List<int> selected
       remainingDoc.pages.add().graphics.drawPdfTemplate(template, Offset.zero, Size(template.size.width, template.size.height));
     }
 
-    final remainingOutput = File('${dir.path}/${outputPrefix}_remaining.pdf');
+    final remainingOutput = File('${dir.path}/${outputPrefix}_remaining_$timestamp.pdf');
     await remainingOutput.writeAsBytes(await remainingDoc.save());
     outputFiles.add(remainingOutput);
     remainingDoc.dispose();
@@ -75,7 +77,7 @@ Future<List<File>> splitPDFWithRemaining(File file, {required List<int> selected
 Future<File> removePagesFromPdf({
   required File originalFile,
   required List<int> pagesToRemove,
-  String outputName = 'pdf_without_removed_pages.pdf',
+  String outputName = 'removed_pages',
 }) async {
   final bytes = await originalFile.readAsBytes();
   final PdfDocument document = PdfDocument(inputBytes: bytes);
@@ -85,9 +87,9 @@ Future<File> removePagesFromPdf({
   for (final pageNum in sortedPages) {
     document.pages.removeAt(pageNum - 1);
   }
-
-  final dir = await getTemporaryDirectory();
-  final output = File('${dir.path}/$outputName');
+  final timestamp = getFormattedTimestamp();
+  final dir = await getAppVisionScanDirectory();
+  final output = File('${dir.path}/${outputName}_$timestamp.pdf');
   await output.writeAsBytes(await document.save());
   document.dispose();
 
@@ -109,8 +111,9 @@ Future<File> reorderPdfPages({
     reorderedDoc.pages.add().graphics.drawPdfTemplate(template, Offset.zero, Size(template.size.width, template.size.height));
   }
 
+  final timestamp = getFormattedTimestamp();
   final dir = await getTemporaryDirectory();
-  final outputFile = File('${dir.path}/${outputName}_${DateTime.now()}.pdf');
+  final outputFile = File('${dir.path}/${outputName}_$timestamp.pdf');
   await outputFile.writeAsBytes(await reorderedDoc.save());
 
   originalDoc.dispose();

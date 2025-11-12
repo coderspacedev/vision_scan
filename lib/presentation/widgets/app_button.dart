@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:visionscan/vision.dart';
 
 class AppButton extends StatelessWidget {
@@ -34,8 +32,8 @@ class AppButton extends StatelessWidget {
       width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? colorAccent,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius ?? 12.r)),
+          backgroundColor: backgroundColor ?? AppTheme.colors.accent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius ?? 12)),
           elevation: 0,
         ),
         onPressed: () {
@@ -43,11 +41,11 @@ class AppButton extends StatelessWidget {
         },
         child: isLoading
             ? SizedBox(
-                width: 20.sp,
-                height: 20.sp,
-                child: CircularProgressIndicator(strokeWidth: 2.sp, valueColor: AlwaysStoppedAnimation<Color>(textColor ?? colorAccentText)),
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(textColor ?? AppTheme.colors.accentText)),
               )
-            : Text(text, style: style?.copyWith(color: textColor ?? colorAccentText) ?? context.button.copyWith(color: textColor ?? colorAccentText)),
+            : Text(text, style: style?.copyWith(color: textColor ?? AppTheme.colors.accentText) ?? context.button.copyWith(color: textColor ?? AppTheme.colors.accentText)),
       ),
     );
   }

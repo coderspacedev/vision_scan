@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visionscan/vision.dart';
+import 'package:flutter/material.dart';
 
 class AppCard extends StatelessWidget {
   final Widget child;
@@ -15,13 +14,13 @@ class AppCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: color ?? colorCard,
+      color: color ?? AppTheme.colors.card,
       margin: margin,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius ?? 12.r)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius ?? 12)),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(radius ?? 12.r),
-        child: Padding(padding: padding ?? EdgeInsets.all(12.sp), child: child),
+        borderRadius: BorderRadius.circular(radius ?? 12),
+        child: Padding(padding: padding ?? EdgeInsets.all(12), child: child),
       ),
     );
   }

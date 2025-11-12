@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:visionscan/presentation/screens/qr/screen_code_generate.dart';
-import 'package:visionscan/presentation/screens/qr/screen_qr_history.dart';
-import '../../../data/sources.dart';
+import 'package:visionscan/extensions/app_router_navigation.dart';
+import 'package:visionscan/navigation/routes.dart';
 import 'package:visionscan/vision.dart';
 
-import 'screen_qr_scanner.dart';
+import '../../../data/sources.dart';
 
 class ScreenQRDashboard extends StatefulWidget {
   const ScreenQRDashboard({super.key});
@@ -19,19 +17,19 @@ class _ScreenQrDashboardState extends State<ScreenQRDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBackground,
+      backgroundColor: AppTheme.colors.background,
       appBar: AppAppBar(
         title: context.localization?.tool_qr_code_scanner ?? '',
-        onBack: () => Get.back(),
+        onBack: () => context.pop(),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: context.scale(12)),
             child: IconButton(
               padding: EdgeInsets.zero,
               onPressed: () async {
-                Get.to(ScreenQrHistory());
+                context.navigateTo(Routes.qrHistory);
               },
-              icon: Icon(Icons.history, color: colorText, size: context.scale(24)),
+              icon: Icon(Icons.history, color: AppTheme.colors.text, size: context.scale(24)),
             ),
           ),
         ],
@@ -41,11 +39,11 @@ class _ScreenQrDashboardState extends State<ScreenQRDashboard> {
         margin: EdgeInsets.all(context.scale(12)),
         child: FloatingActionButton.extended(
           onPressed: () {
-            Get.to(ScreenQRScanner());
+            context.navigateTo(Routes.qrScanner);
           },
-          icon: Icon(Icons.qr_code_scanner_rounded, color: colorAccentText),
-          label: Text(context.localization?.action_scan ?? 'Scan', style: context.bodyBoldLarge.copyWith(color: colorAccentText)),
-          backgroundColor: colorAccent,
+          icon: Icon(Icons.qr_code_scanner_rounded, color: AppTheme.colors.accentText),
+          label: Text(context.localization?.action_scan ?? 'Scan', style: context.bodyBoldLarge.copyWith(color: AppTheme.colors.accentText)),
+          backgroundColor: AppTheme.colors.accent,
           elevation: context.scale(2),
           highlightElevation: context.scale(4),
         ),
@@ -89,7 +87,7 @@ class _ScreenQrDashboardState extends State<ScreenQRDashboard> {
             final tool = items[index];
             return GestureDetector(
               onTap: () {
-                Get.to(ScreenCodeGenerate(type: tool.type ?? '', title: tool.title ?? ''));
+                context.navigateToObject(Routes.qrGenerate, {"type": tool.type ?? '', "title": tool.title ?? ''});
               },
               child: AppContainer(
                 padding: EdgeInsets.all(context.scale(16)),

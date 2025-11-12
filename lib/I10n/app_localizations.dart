@@ -118,11 +118,11 @@ abstract class AppLocalizations {
   /// **'QR Code Scanner'**
   String get tool_qr_code_scanner;
 
-  /// No description provided for @tool_scanned_pdfs.
+  /// No description provided for @tool_saved_pdfs.
   ///
   /// In en, this message translates to:
-  /// **'Scanned PDF'**
-  String get tool_scanned_pdfs;
+  /// **'Saved PDFs'**
+  String get tool_saved_pdfs;
 
   /// No description provided for @tool_merge_pdfs.
   ///

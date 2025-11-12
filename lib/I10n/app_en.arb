@@ -4,7 +4,7 @@
 
     "tool_document_scanner": "Document Scanner",
     "tool_qr_code_scanner": "QR Code Scanner",
-    "tool_scanned_pdfs": "Scanned PDF",
+    "tool_saved_pdfs": "Saved PDFs",
     "tool_merge_pdfs": "Merge PDFs",
     "tool_split_pdf": "Split PDF",
     "tool_reorder_pdf": "Reorder PDF",

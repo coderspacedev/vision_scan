@@ -1,6 +1,6 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visionscan/vision.dart';
 
 class AppTextField extends StatelessWidget {
@@ -41,22 +41,22 @@ class AppTextField extends StatelessWidget {
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
         prefixIcon: prefixIcon != null
-            ? Icon(prefixIcon, color: colorText)
+            ? Icon(prefixIcon, color: AppTheme.colors.text)
             : null,
         suffixIcon: suffixIcon,
         hintText: hint,
         hintStyle: context.bodyMediumLarge.copyWith(
-          color: colorText.withAlpha(100),
+          color: AppTheme.colors.text.withAlpha(100),
         ),
         filled: true,
-        fillColor: colorCard,
+        fillColor: AppTheme.colors.card,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         contentPadding:
             contentPadding ??
-            EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+            EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),
     );
   }

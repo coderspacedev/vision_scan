@@ -2,21 +2,21 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:visionscan/extensions/app_router_navigation.dart';
+import 'package:visionscan/extensions/pdf_utils.dart';
 import 'package:visionscan/vision.dart';
 
-import 'screen_document_scan_preview.dart';
+import '../../../navigation/routes.dart';
 
-class ScreenScannedPdfs extends StatefulWidget {
-  const ScreenScannedPdfs({super.key});
+class ScreenSavedPdfs extends StatefulWidget {
+  const ScreenSavedPdfs({super.key});
 
   @override
-  State<ScreenScannedPdfs> createState() => _ScreenScannedPdfsState();
+  State<ScreenSavedPdfs> createState() => _ScreenSavedPdfsState();
 }
 
-class _ScreenScannedPdfsState extends State<ScreenScannedPdfs> {
+class _ScreenSavedPdfsState extends State<ScreenSavedPdfs> {
   List<FileSystemEntity> pdfFiles = [];
 
   @override
@@ -26,7 +26,7 @@ class _ScreenScannedPdfsState extends State<ScreenScannedPdfs> {
   }
 
   Future<void> _loadPdfFiles() async {
-    final dir = await getApplicationDocumentsDirectory();
+    final dir = await getAppVisionScanDirectory();
     final files = dir.listSync();
     final pdfs = files.where((file) => file.path.endsWith('.pdf')).toList();
 
@@ -44,14 +44,14 @@ class _ScreenScannedPdfsState extends State<ScreenScannedPdfs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBackground,
-      appBar: AppAppBar(title: 'Scanned Docs', onBack: () => Get.back()),
+      backgroundColor: AppTheme.colors.background,
+      appBar: AppAppBar(title: context.localization?.tool_saved_pdfs ?? 'Saved Pdfs', onBack: () => context.pop()),
       body: pdfFiles.isEmpty
           ? Center(child: Text("No PDF files found", style: context.bodyBoldMedium))
           : ListView.separated(
               itemCount: pdfFiles.length,
               separatorBuilder: (context, index) =>
-                  Divider(color: colorText.withAlpha(20), thickness: 0.5, indent: context.scale(16), endIndent: context.scale(16)),
+                  Divider(color: AppTheme.colors.text.withAlpha(20), thickness: 0.5, indent: context.scale(16), endIndent: context.scale(16)),
               itemBuilder: (context, index) {
                 final file = File(pdfFiles[index].path);
                 final fileName = file.path.split('/').last;
@@ -66,14 +66,16 @@ class _ScreenScannedPdfsState extends State<ScreenScannedPdfs> {
                       'assets/icons/ic_placeholder_pdf.svg',
                       width: context.scale(24),
                       height: context.scale(24),
-                      colorFilter: ColorFilter.mode(colorAccentText, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(AppTheme.colors.accentText, BlendMode.srcIn),
                     ),
                   ),
                   title: Text(fileName, style: context.bodyBoldMedium, overflow: TextOverflow.ellipsis),
-                  subtitle: Text(fileSize, style: context.bodySmall.copyWith(color: colorText.withAlpha(100))),
+                  subtitle: Text(fileSize, style: context.bodySmall.copyWith(color: AppTheme.colors.text.withAlpha(100))),
                   trailing: PopupMenuButton<String>(
-                    surfaceTintColor: colorCard,
-                    color: colorCard,
+                    color: AppTheme.colors.card,
+                    surfaceTintColor: AppTheme.colors.card,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.scale(8))),
                     onSelected: (value) async {
                       if (value == 'delete') {
                         file.deleteSync();
@@ -98,7 +100,7 @@ class _ScreenScannedPdfsState extends State<ScreenScannedPdfs> {
                     ],
                   ),
                   onTap: () {
-                    Get.to(ScreenDocumentScanPreview(scannedDocuments: pdfFiles[index].path, isScanned: false));
+                    context.navigateToObject(Routes.pdfPreview, {"scannedDocuments": pdfFiles[index].path, "isScanned": false});
                   },
                 );
               },

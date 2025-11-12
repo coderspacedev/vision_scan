@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:lottie/lottie.dart';
+import 'package:visionscan/extensions/app_router_navigation.dart';
+import '../../../navigation/routes.dart';
 import '/presentation/screens/qr/screen_result.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:visionscan/vision.dart';
@@ -50,11 +52,11 @@ class _ScreenQRScannerState extends State<ScreenQRScanner> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.error, color: colorAccentText, size: context.scale(32)),
+                        Icon(Icons.error, color: AppTheme.colors.accentText, size: context.scale(32)),
                         SizedBox(height: context.scale(12)),
                         Text(
                           'Camera error: $error',
-                          style: context.bodySmall.copyWith(color: colorAccentText),
+                          style: context.bodySmall.copyWith(color: AppTheme.colors.accentText),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -69,7 +71,7 @@ class _ScreenQRScannerState extends State<ScreenQRScanner> {
               if (value != null) {
                 debugPrint('✅ Scanned: $value');
                 controller.stop();
-                Get.off(ScreenResult(qrContent: value));
+                context.navigateToObject(Routes.qrScanResult, {"qrContent": value});
               }
             },
           ),
@@ -97,13 +99,13 @@ class _ScreenQRScannerState extends State<ScreenQRScanner> {
     return AppAppBar(
       title: '',
       backgroundColor: Colors.transparent,
-      onBack: () => Get.back(),
-      iconColor: colorAccentText,
+      onBack: () => context.pop(),
+      iconColor: AppTheme.colors.accentText,
       actions: [
         StatefulBuilder(
           builder: (context, setState) {
             return IconButton(
-              color: colorAccentText,
+              color: AppTheme.colors.accentText,
               icon: Icon(isTorchOn ? Icons.flash_on_outlined : Icons.flash_off_rounded),
               iconSize: context.scale(20),
               onPressed: () {
@@ -119,9 +121,9 @@ class _ScreenQRScannerState extends State<ScreenQRScanner> {
           },
         ),
         IconButton(
-          color: colorAccentText,
+          color: AppTheme.colors.accentText,
           iconSize: context.scale(20),
-          icon: Icon(Icons.info_outline_rounded, color: colorAccentText),
+          icon: Icon(Icons.info_outline_rounded, color: AppTheme.colors.accentText),
           padding: EdgeInsets.zero,
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
@@ -139,7 +141,7 @@ class _ScreenQRScannerState extends State<ScreenQRScanner> {
       barrierDismissible: true,
       builder: (_) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.scale(8))),
-        backgroundColor: colorCard,
+        backgroundColor: AppTheme.colors.card,
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: context.scale(420)),
           child: Padding(
@@ -171,7 +173,7 @@ class _ScreenQRScannerState extends State<ScreenQRScanner> {
                   child: AppButton(
                     height: context.scale(36),
                     text: context.localization?.action_guide_qr_code ?? '',
-                    style: context.bodyBoldMedium.copyWith(color: colorAccentText),
+                    style: context.bodyBoldMedium.copyWith(color: AppTheme.colors.accentText),
                     radius: context.scale(8),
                     onPressed: () {
                       Navigator.pop(context);

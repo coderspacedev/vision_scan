@@ -15,10 +15,8 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   permission_handler: ^12.0.0+1
-  get: ^4.6.6
   get_storage: ^2.1.1
   dio: ^5.7.0
-  flutter_screenutil: ^5.5.3
   flutter_svg: ^2.0.16
   shared_preferences: ^2.5.3
   url_launcher: ^6.2.3
@@ -41,6 +39,10 @@ dependencies:
   file_picker: ^10.2.0
   pdf_render: ^1.4.7
   flutter_reorderable_grid_view: ^5.5.0
+  coderspace: ^1.0.14
+  equatable: ^2.0.7
+  flutter_bloc: ^9.1.1
+  syncfusion_flutter_pdf: ^30.2.7
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +59,5 @@ flutter:
   assets:
     - assets/
     - assets/icons/
-    - assets/vectors/
     - assets/animations/
     - assets/qr/

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:visionscan/vision.dart';
 
 class ScreenQrHistory extends StatefulWidget {
@@ -15,10 +14,10 @@ class _ScreenQrHistoryState extends State<ScreenQrHistory> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: colorBackground,
+        backgroundColor: AppTheme.colors.background,
         appBar: AppAppBar(
           title: 'History',
-          onBack: () => Get.back(),
+          onBack: () => context.pop(),
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(context.scale(24)),
             child: Align(
@@ -60,22 +59,22 @@ class _ScreenQrHistoryState extends State<ScreenQrHistory> {
         return ListView.separated(
           padding: EdgeInsets.only(top: context.scale(12)),
           separatorBuilder: (context, index) =>
-              Divider(color: colorText.withAlpha(20), thickness: 0.5, indent: context.scale(16), endIndent: context.scale(16)),
+              Divider(color: AppTheme.colors.text.withAlpha(20), thickness: 0.5, indent: context.scale(16), endIndent: context.scale(16)),
           itemCount: history.length,
           itemBuilder: (context, index) {
             final item = history[index];
             return ListTile(
               dense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: context.scale(12), vertical: context.scale(0)),
-              leading: AppContainer(color: colorCard, padding: EdgeInsets.all(context.scale(12)), child: Icon(getQRTypeIcon(item.qrContent))),
+              leading: AppContainer(color: AppTheme.colors.card, padding: EdgeInsets.all(context.scale(12)), child: Icon(getQRTypeIcon(item.qrContent))),
               title: Text(item.qrContent.contains(':')
                   ? item.qrContent.split(':').sublist(1).join(':').trim()
                   : item.qrContent, style: context.bodyBoldMedium),
               subtitle: Row(
                 children: [
-                  Text(item.type, style: context.bodyBoldSmall.copyWith(color: colorText.withAlpha(100))),
+                  Text(item.type, style: context.bodyBoldSmall.copyWith(color: AppTheme.colors.text.withAlpha(100))),
                   SizedBox(width: context.scale(8)),
-                  Text('${DateTime.fromMillisecondsSinceEpoch(item.timestamp)}', style: context.bodySmall.copyWith(color: colorText.withAlpha(100))),
+                  Text('${DateTime.fromMillisecondsSinceEpoch(item.timestamp)}', style: context.bodySmall.copyWith(color: AppTheme.colors.text.withAlpha(100))),
                 ],
               ),
             );
@@ -103,22 +102,22 @@ class _ScreenQrHistoryState extends State<ScreenQrHistory> {
         return ListView.separated(
           padding: EdgeInsets.only(top: context.scale(12)),
           separatorBuilder: (context, index) =>
-              Divider(color: colorText.withAlpha(20), thickness: 0.5, indent: context.scale(16), endIndent: context.scale(16)),
+              Divider(color: AppTheme.colors.text.withAlpha(20), thickness: 0.5, indent: context.scale(16), endIndent: context.scale(16)),
           itemCount: history.length,
           itemBuilder: (context, index) {
             final item = history[index];
             return ListTile(
               dense: true,
               contentPadding: EdgeInsets.symmetric(horizontal: context.scale(12), vertical: context.scale(0)),
-              leading: AppContainer(color: colorCard, padding: EdgeInsets.all(context.scale(12)), child: Icon(getQRTypeIcon(item.qrContent))),
+              leading: AppContainer(color: AppTheme.colors.card, padding: EdgeInsets.all(context.scale(12)), child: Icon(getQRTypeIcon(item.qrContent))),
               title: Text(item.qrContent.contains(':')
                   ? item.qrContent.split(':').sublist(1).join(':').trim()
                   : item.qrContent, style: context.bodyBoldMedium),
               subtitle: Row(
                 children: [
-                  Text(item.type, style: context.bodyBoldSmall.copyWith(color: colorText.withAlpha(100))),
+                  Text(item.type, style: context.bodyBoldSmall.copyWith(color: AppTheme.colors.text.withAlpha(100))),
                   SizedBox(width: context.scale(8)),
-                  Text('${DateTime.fromMillisecondsSinceEpoch(item.timestamp)}', style: context.bodySmall.copyWith(color: colorText.withAlpha(100))),
+                  Text('${DateTime.fromMillisecondsSinceEpoch(item.timestamp)}', style: context.bodySmall.copyWith(color: AppTheme.colors.text.withAlpha(100))),
                 ],
               ),
             );

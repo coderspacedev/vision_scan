@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+
 import 'package:pdf_render/pdf_render.dart';
 import 'package:visionscan/vision.dart';
 
@@ -36,14 +36,14 @@ class _ScreenReorderPdfPagesState extends State<ScreenReorderPdfPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBackground,
-      appBar: AppAppBar(title: context.localization?.tool_reorder_pdf ?? 'Reorder PDF', onBack: () => Get.back()),
+      backgroundColor: AppTheme.colors.background,
+      appBar: AppAppBar(title: context.localization?.tool_reorder_pdf ?? 'Reorder PDF', onBack: () => context.pop()),
       body: isProcessing
           ? Center(
               child: SizedBox(
                 width: context.scale(24),
                 height: context.scale(24),
-                child: CircularProgressIndicator(color: colorAccent, strokeWidth: context.scale(2)),
+                child: CircularProgressIndicator(color: AppTheme.colors.accent, strokeWidth: context.scale(2)),
               ),
             )
           : Column(
@@ -114,7 +114,7 @@ class _ScreenReorderPdfPagesState extends State<ScreenReorderPdfPages> {
       decoration: BoxDecoration(
         border: Border.all(color: borderColor, width: context.scale(1)),
         borderRadius: BorderRadius.circular(context.scale(0)),
-        color: colorCard,
+        color: AppTheme.colors.card,
       ),
       child: Image.memory(img, fit: BoxFit.contain),
     );
@@ -151,7 +151,7 @@ class _ScreenReorderPdfPagesState extends State<ScreenReorderPdfPages> {
           text: context.localization?.action_reorder_pages ?? 'Reorder',
           isLoading: isLoading,
           style: context.bodyBoldMedium,
-          textColor: colorAccentText,
+          textColor: AppTheme.colors.accentText,
           onPressed: isDisabled ? null : () => _handleReorder,
         ),
       ),
@@ -177,7 +177,15 @@ class _ScreenReorderPdfPagesState extends State<ScreenReorderPdfPages> {
   }
 
   void showMessage(String title, String message) {
-    Get.snackbar(title, message, snackPosition: SnackPosition.BOTTOM);
+    ScaffoldMessenger.of(context).clearSnackBars();
+    final snackBar = SnackBar(
+      content: Text(
+        message ?? '',
+        style: context.bodyMedium.copyWith(color: Colors.white),
+      ),
+      backgroundColor: Colors.black54,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   Future<void> setupPages() async {

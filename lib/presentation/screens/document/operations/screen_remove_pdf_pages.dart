@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+
 import 'package:pdf_render/pdf_render.dart';
 import 'package:visionscan/vision.dart';
 
@@ -37,10 +37,10 @@ class _ScreenRemovePdfPagesState extends State<ScreenRemovePdfPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBackground,
+      backgroundColor: AppTheme.colors.background,
       appBar: AppAppBar(
         title: context.localization?.tool_remove_page_pdf ?? 'Remove PDF',
-        onBack: () => Get.back(),
+        onBack: () => context.pop(),
         actions: [
           IconButton(icon: const Icon(Icons.undo), onPressed: _undoStack.isNotEmpty ? _handleUndo : null),
           IconButton(icon: const Icon(Icons.redo), onPressed: _redoStack.isNotEmpty ? _handleRedo : null),
@@ -51,7 +51,7 @@ class _ScreenRemovePdfPagesState extends State<ScreenRemovePdfPages> {
               child: SizedBox(
                 width: context.scale(24),
                 height: context.scale(24),
-                child: CircularProgressIndicator(color: colorAccent, strokeWidth: context.scale(2)),
+                child: CircularProgressIndicator(color: AppTheme.colors.accent, strokeWidth: context.scale(2)),
               ),
             )
           : Column(
@@ -121,7 +121,7 @@ class _ScreenRemovePdfPagesState extends State<ScreenRemovePdfPages> {
             decoration: BoxDecoration(
               border: Border.all(color: borderColor, width: context.scale(1)),
               borderRadius: BorderRadius.circular(context.scale(0)),
-              color: colorCard,
+              color: AppTheme.colors.card,
             ),
             child: Image.memory(img, fit: BoxFit.contain),
           ),
@@ -154,7 +154,7 @@ class _ScreenRemovePdfPagesState extends State<ScreenRemovePdfPages> {
           text: context.localization?.action_remove_pages ?? 'Remove Pages',
           isLoading: isLoading,
           style: context.bodyBoldMedium,
-          textColor: colorAccentText,
+          textColor: AppTheme.colors.accentText,
           onPressed: isDisabled ? null : _handleRemove,
         ),
       ),
@@ -180,7 +180,15 @@ class _ScreenRemovePdfPagesState extends State<ScreenRemovePdfPages> {
   }
 
   void showMessage(String title, String message) {
-    Get.snackbar(title, message, snackPosition: SnackPosition.BOTTOM);
+    ScaffoldMessenger.of(context).clearSnackBars();
+    final snackBar = SnackBar(
+      content: Text(
+        message ?? '',
+        style: context.bodyMedium.copyWith(color: Colors.white),
+      ),
+      backgroundColor: Colors.black54,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   Future<void> setupPages() async {

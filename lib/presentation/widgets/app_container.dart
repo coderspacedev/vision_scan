@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:visionscan/vision.dart';
+
+import '../../vision.dart';
 
 class AppContainer extends StatelessWidget {
   final Widget? child;
@@ -33,7 +34,7 @@ class AppContainer extends StatelessWidget {
       height: height,
       margin: margin,
       padding: padding,
-      decoration: decoration ?? BoxDecoration(color: color ?? colorCard, borderRadius: BorderRadius.circular(radius ?? context.scale(12))),
+      decoration: decoration ?? BoxDecoration(color: color ?? AppTheme.colors.card, borderRadius: BorderRadius.circular(radius ?? context.scale(12))),
       child: child,
     );
   }

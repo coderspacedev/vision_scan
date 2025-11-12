@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_contact_picker/model/contact.dart';
-import 'package:get/get.dart';
 import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
-import 'package:visionscan/presentation/screens/qr/screen_barcode_generate_result.dart';
-import 'package:visionscan/presentation/screens/qr/screen_qr_generate_result.dart';
+import 'package:flutter_native_contact_picker/model/contact.dart';
+import 'package:visionscan/extensions/app_router_navigation.dart';
+import 'package:visionscan/navigation/routes.dart';
 import 'package:visionscan/vision.dart';
 
 class ScreenCodeGenerate extends StatefulWidget {
@@ -107,8 +106,8 @@ class _ScreenCodeGenerateState extends State<ScreenCodeGenerate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBackground,
-      appBar: AppAppBar(title: widget.title, onBack: () => Get.back()),
+      backgroundColor: AppTheme.colors.background,
+      appBar: AppAppBar(title: widget.title, onBack: () => context.back()),
       body: Padding(
         padding: EdgeInsets.all(context.scale(24)),
         child: Column(
@@ -126,7 +125,7 @@ class _ScreenCodeGenerateState extends State<ScreenCodeGenerate> {
                     inputFormatters: getInputFormatters(fieldLabels[index]),
                     suffixIcon: isNumberField
                         ? IconButton(
-                            icon: Icon(Icons.contacts, color: colorAccent),
+                            icon: Icon(Icons.contacts, color: AppTheme.colors.accent),
                             onPressed: () async {
                               final contact = await pickContactNumber();
                               if (contact != null) {
@@ -175,9 +174,9 @@ class _ScreenCodeGenerateState extends State<ScreenCodeGenerate> {
                 final result = buffer.toString();
                 debugPrint('✅ Generated QR Content:\n$result');
                 if (widget.type == 'qr') {
-                  Get.to(ScreenQrGenerateResult(qrContent: result, type: widget.type));
+                  context.navigateToObject(Routes.qrGenerateResult, {"qrContent": result, "type": widget.type});
                 } else {
-                  Get.to(ScreenBarCodeGenerateResult(barContent: result, type: widget.type));
+                  context.navigateToObject(Routes.barGenerateResult, {"barContent": result, "type": widget.type});
                 }
               },
             ),

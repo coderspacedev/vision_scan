@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'screen_dashboard.dart';
+import 'package:visionscan/extensions/app_router_navigation.dart';
+import 'package:visionscan/navigation/routes.dart';
 import 'package:visionscan/vision.dart';
 
 class ScreenSplash extends StatefulWidget {
@@ -20,7 +20,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
   Future<void> goto() async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(seconds: 5), () {
-        Get.offAll(const ScreenDashboard());
+        if (mounted) context.navigateTo(Routes.dashboard);
       });
     });
   }
@@ -28,7 +28,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBackground,
+      backgroundColor: AppTheme.colors.background,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -41,7 +41,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
               children: [
                 Text(
                   context.localization?.app_name ?? '',
-                  style: context.baseTextStyle(32, fontWeight: FontWeight.w900, lineHeight: 1.2, color: colorAccent),
+                  style: context.baseTextStyle(32, fontWeight: FontWeight.w900, lineHeight: 1.2, color: AppTheme.colors.accent),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: context.scale(4)),
@@ -51,7 +51,11 @@ class _ScreenSplashState extends State<ScreenSplash> {
                   child: SizedBox(
                     width: context.scale(200),
                     height: context.scale(4),
-                    child: LinearProgressIndicator(color: colorAccent, backgroundColor: colorText.withAlpha(10), minHeight: context.scale(3)),
+                    child: LinearProgressIndicator(
+                      color: AppTheme.colors.accent,
+                      backgroundColor: AppTheme.colors.text.withAlpha(10),
+                      minHeight: context.scale(3),
+                    ),
                   ),
                 ),
               ],

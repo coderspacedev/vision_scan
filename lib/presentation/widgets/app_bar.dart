@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visionscan/vision.dart';
 
 class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -45,7 +44,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: elevation ?? 0,
       centerTitle: centerTitle,
-      backgroundColor: backgroundColor ?? colorBackground,
+      backgroundColor: backgroundColor ?? AppTheme.colors.background,
       automaticallyImplyLeading: automaticallyImplyLeading,
       forceMaterialTransparency: forceMaterialTransparency,
       titleSpacing: titleSpacing ?? 0,
@@ -53,7 +52,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: isBack
           ? IconButton(
               onPressed: onBack ?? () => Navigator.of(context).pop(),
-              icon: Icon(icon ?? Icons.arrow_back_rounded, size: context.scale(24), color: iconColor ?? colorText),
+              icon: Icon(icon ?? Icons.arrow_back_rounded, size: context.scale(24), color: iconColor ?? AppTheme.colors.text),
               padding: EdgeInsets.zero,
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
@@ -64,7 +63,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: EdgeInsets.only(left: isBack ? context.scale(4) : context.scale(16)),
               child: Text(
                 title!,
-                style: titleStyle ?? context.headline5.copyWith(color: textColor ?? colorText, fontWeight: FontWeight.w600),
+                style: titleStyle ?? context.headline5.copyWith(color: textColor ?? AppTheme.colors.text, fontWeight: FontWeight.w600),
               ),
             )
           : const SizedBox.shrink(),
@@ -74,5 +73,5 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight((toolbarHeight ?? 56.h) + (bottom?.preferredSize.height ?? 0));
+  Size get preferredSize => Size.fromHeight((toolbarHeight ?? 56) + (bottom?.preferredSize.height ?? 0));
 }

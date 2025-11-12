@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:intl/intl.dart';
+import 'package:visionscan/extensions/app_router_navigation.dart';
 import 'package:visionscan/vision.dart';
 
 class ScreenResult extends StatefulWidget {
@@ -24,8 +25,8 @@ class _ScreenResultState extends State<ScreenResult> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBackground,
-      appBar: AppAppBar(title: context.localization?.title_scan_result ?? '', onBack: () => Get.back()),
+      backgroundColor: AppTheme.colors.background,
+      appBar: AppAppBar(title: context.localization?.title_scan_result ?? '', onBack: () => context.pop()),
       body: Column(
         children: [
           AppContainer(
@@ -48,7 +49,7 @@ class _ScreenResultState extends State<ScreenResult> {
                   children: [
                     Text(detectQRType(widget.qrContent, context: context), style: context.bodyBoldLarge),
                     SizedBox(height: context.scale(4)),
-                    Text(formattedDate(), style: context.bodySmall.copyWith(color: colorText.withAlpha(80))),
+                    Text(formattedDate(), style: context.bodySmall.copyWith(color: AppTheme.colors.text.withAlpha(80))),
                   ],
                 ),
               ],
@@ -62,7 +63,7 @@ class _ScreenResultState extends State<ScreenResult> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(context.localization?.label_format ?? '', style: context.bodySmall.copyWith(color: colorText.withAlpha(80))),
+                Text(context.localization?.label_format ?? '', style: context.bodySmall.copyWith(color: AppTheme.colors.text.withAlpha(80))),
                 SizedBox(height: context.scale(4)),
                 Text(widget.qrContent, style: context.bodyMedium),
               ],

@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gallery_saver_plus/gallery_saver.dart';
-import 'package:get/get.dart';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
@@ -73,8 +73,8 @@ class _ScreenQrGenerateResultState extends State<ScreenQrGenerateResult> {
         : PrettyQrBrush.gradient(gradient: gradientOptions[selectedGradientIndex]);
 
     return Scaffold(
-      backgroundColor: colorBackground,
-      appBar: AppAppBar(title: '', onBack: () => Get.back()),
+      backgroundColor: AppTheme.colors.background,
+      appBar: AppAppBar(title: '', onBack: () => context.pop()),
       body: Column(
         children: [
           Expanded(
@@ -117,7 +117,7 @@ class _ScreenQrGenerateResultState extends State<ScreenQrGenerateResult> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text("Rounded Corners"),
-                        CupertinoSwitch(value: isRounded, activeTrackColor: colorAccent, onChanged: (val) => setState(() => isRounded = val)),
+                        CupertinoSwitch(value: isRounded, activeTrackColor: AppTheme.colors.accent, onChanged: (val) => setState(() => isRounded = val)),
                       ],
                     ),
                   ),
@@ -171,7 +171,7 @@ class _ScreenQrGenerateResultState extends State<ScreenQrGenerateResult> {
                                 ),
                               ),
                             ),
-                            if (isSelected) const Positioned.fill(child: Icon(Icons.check_rounded, color: colorPrimary)),
+                            if (isSelected) Positioned.fill(child: Icon(Icons.check_rounded, color: AppTheme.colors.primary)),
                           ],
                         ),
                       );
@@ -208,7 +208,7 @@ class _ScreenQrGenerateResultState extends State<ScreenQrGenerateResult> {
             value: value,
             isExpanded: true,
             elevation: 2,
-            dropdownColor: colorCard,
+            dropdownColor: AppTheme.colors.card,
             borderRadius: BorderRadius.circular(context.scale(8)),
             style: context.bodyLarge,
             padding: EdgeInsets.zero,
@@ -233,7 +233,7 @@ class _ScreenQrGenerateResultState extends State<ScreenQrGenerateResult> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message ?? '', style: context.bodyMediumLarge),
-        backgroundColor: colorCard,
+        backgroundColor: AppTheme.colors.card,
       ),
     );
   }

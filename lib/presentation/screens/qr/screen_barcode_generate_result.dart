@@ -4,7 +4,6 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gallery_saver_plus/gallery_saver.dart';
-import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:visionscan/vision.dart';
@@ -34,8 +33,8 @@ class _ScreenBarCodeGenerateResultState extends State<ScreenBarCodeGenerateResul
   Widget build(BuildContext context) {
     final barcode = getBarcodeByType(context, widget.type);
     return Scaffold(
-      backgroundColor: colorBackground,
-      appBar: AppAppBar(title: '', onBack: () => Get.back()),
+      backgroundColor: AppTheme.colors.background,
+      appBar: AppAppBar(title: '', onBack: () => context.pop()),
       body: Column(
         children: [
           Padding(
@@ -50,7 +49,7 @@ class _ScreenBarCodeGenerateResultState extends State<ScreenBarCodeGenerateResul
                   child: AppContainer(
                     width: double.infinity,
                     padding: EdgeInsets.all(context.scale(12)),
-                    decoration: BoxDecoration(color: colorPrimary, borderRadius: BorderRadius.circular(context.scale(12))),
+                    decoration: BoxDecoration(color: AppTheme.colors.primary, borderRadius: BorderRadius.circular(context.scale(12))),
                     child: BarcodeWidget(barcode: barcode, data: widget.barContent, width: double.infinity, height: 100, drawText: true),
                   ),
                 ),
@@ -74,7 +73,7 @@ class _ScreenBarCodeGenerateResultState extends State<ScreenBarCodeGenerateResul
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message ?? '', style: context.bodyMediumLarge),
-        backgroundColor: colorCard,
+        backgroundColor: AppTheme.colors.card,
       ),
     );
   }

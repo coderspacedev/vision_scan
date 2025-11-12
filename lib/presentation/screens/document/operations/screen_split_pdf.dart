@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
+
 import 'package:visionscan/vision.dart';
 
 class ScreenSplitPdf extends StatefulWidget {
@@ -22,8 +22,8 @@ class _ScreenSplitPdfState extends State<ScreenSplitPdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBackground,
-      appBar: AppAppBar(title: context.localization?.tool_split_pdf ?? 'Split PDF', onBack: () => Get.back()),
+      backgroundColor: AppTheme.colors.background,
+      appBar: AppAppBar(title: context.localization?.tool_split_pdf ?? 'Split PDF', onBack: () => context.pop()),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return Column(
@@ -39,15 +39,20 @@ class _ScreenSplitPdfState extends State<ScreenSplitPdf> {
                             child: AppContainer(
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                border: BoxBorder.all(color: colorAccent, width: context.scale(1)),
-                                color: colorCard,
+                                border: BoxBorder.all(color: AppTheme.colors.accent, width: context.scale(1)),
+                                color: AppTheme.colors.card,
                                 borderRadius: BorderRadius.circular(context.scale(12)),
                               ),
                               padding: EdgeInsets.all(context.scale(12)),
                               margin: EdgeInsets.all(context.scale(12)),
                               child: Column(
                                 children: [
-                                  Icon(Icons.upload_file_rounded, color: colorAccent, size: context.scale(56)),
+                                  SvgPicture.asset(
+                                    'assets/icons/ic_action_upload_file.svg',
+                                    width: context.scale(56),
+                                    height: context.scale(56),
+                                    colorFilter: ColorFilter.mode(AppTheme.colors.accent, BlendMode.srcIn),
+                                  ),
                                   SizedBox(height: context.scale(12)),
                                   Text(context.localization?.label_choose_pdf_file ?? 'Choose PDF file', style: context.bodyBoldLarge),
                                   SizedBox(height: context.scale(4)),
@@ -73,11 +78,11 @@ class _ScreenSplitPdfState extends State<ScreenSplitPdf> {
                                           'assets/icons/ic_placeholder_pdf.svg',
                                           width: context.scale(24),
                                           height: context.scale(24),
-                                          colorFilter: ColorFilter.mode(colorAccentText, BlendMode.srcIn),
+                                          colorFilter: ColorFilter.mode(AppTheme.colors.accentText, BlendMode.srcIn),
                                         ),
                                       ),
                                       title: Text(selectedFile!.path.split('/').last, style: context.bodyBoldMedium, overflow: TextOverflow.ellipsis),
-                                      subtitle: Text(_getFileSize(selectedFile!), style: context.bodySmall.copyWith(color: colorText.withAlpha(100))),
+                                      subtitle: Text(_getFileSize(selectedFile!), style: context.bodySmall.copyWith(color: AppTheme.colors.text.withAlpha(100))),
                                     ),
                                   ),
                                   SizedBox(height: context.scale(16)),
@@ -123,8 +128,8 @@ class _ScreenSplitPdfState extends State<ScreenSplitPdf> {
             Expanded(
               child: AppButton(
                 text: context.localization?.action_cancel ?? 'Cancel',
-                backgroundColor: colorCard,
-                textColor: colorCardText,
+                backgroundColor: AppTheme.colors.card,
+                textColor: AppTheme.colors.cardText,
                 style: context.bodyBoldMedium,
                 onPressed: isDisabled
                     ? null
@@ -140,7 +145,7 @@ class _ScreenSplitPdfState extends State<ScreenSplitPdf> {
                 text: context.localization?.action_split ?? 'Split',
                 isLoading: isSplitting,
                 style: context.bodyBoldMedium,
-                textColor: colorAccentText,
+                textColor: AppTheme.colors.accentText,
                 onPressed: isDisabled ? null : () => _handleSplit(),
               ),
             ),
@@ -194,6 +199,14 @@ class _ScreenSplitPdfState extends State<ScreenSplitPdf> {
   }
 
   void showMessage(String title, String message) {
-    Get.snackbar(title, message, snackPosition: SnackPosition.BOTTOM);
+    ScaffoldMessenger.of(context).clearSnackBars();
+    final snackBar = SnackBar(
+      content: Text(
+        message ?? '',
+        style: context.bodyMedium.copyWith(color: Colors.white),
+      ),
+      backgroundColor: Colors.black54,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
